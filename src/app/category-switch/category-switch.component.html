@@ -1,5 +1,2 @@
-<div class="category-switch-main">
-    <button *ngFor="let category of categories; let i = index"
-        class="{{ (i + 1) === selectedIndex ? 'active' : '' }}"
-        (click)="selectIndex(i + 1)">{{category}}</button>
-</div>
+<button *ngFor="let category of categories; let i = index" class="{{ (i + 1) === selectedIndex ? 'active' : '' }}"
+    (click)="selectIndex(i + 1)">{{category}}</button>

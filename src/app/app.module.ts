@@ -7,9 +7,11 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { HeaderComponent } from './header/header.component';
 import { IconModule } from './icon/icon.module';
 import { CategorySwitchComponent } from './category-switch/category-switch.component';
+import { NavComponent } from './nav/nav.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
-  declarations: [AppComponent, BreadcrumbComponent, HeaderComponent, CategorySwitchComponent],
+  declarations: [AppComponent, BreadcrumbComponent, HeaderComponent, CategorySwitchComponent, NavComponent, InputComponent],
   imports: [BrowserModule, AppRoutingModule, IconModule],
   providers: [],
   bootstrap: [AppComponent],
