@@ -1,0 +1,8 @@
+<ng-container *ngIf="currentIcon">
+    <div class="icon-empty"></div>
+    <div class="icon">
+        <ng-container *ngComponentOutlet="currentIcon"></ng-container>
+    </div>
+</ng-container>
+
+<input type="button" value="{{ value }}" [class.hasIcon]="currentIcon" />

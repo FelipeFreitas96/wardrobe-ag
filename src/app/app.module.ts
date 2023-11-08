@@ -9,9 +9,10 @@ import { IconModule } from './icon/icon.module';
 import { CategorySwitchComponent } from './category-switch/category-switch.component';
 import { NavComponent } from './nav/nav.component';
 import { InputComponent } from './input/input.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
-  declarations: [AppComponent, BreadcrumbComponent, HeaderComponent, CategorySwitchComponent, NavComponent, InputComponent],
+  declarations: [AppComponent, BreadcrumbComponent, HeaderComponent, CategorySwitchComponent, NavComponent, InputComponent, ButtonComponent],
   imports: [BrowserModule, AppRoutingModule, IconModule],
   providers: [],
   bootstrap: [AppComponent],
