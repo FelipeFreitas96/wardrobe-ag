@@ -1,0 +1,19 @@
+@import '../../styles'
+
+.header-main
+    display: flex
+    flex-direction: column
+    gap: $space-3
+
+    > ::ng-deep div
+        display: flex
+        flex-direction: row
+        gap: $space-2
+            
+        ::ng-deep svg
+            fill: $primary-color
+
+        ::ng-deep h1
+            color: $gray-700
+            font-size: $text-lg
+            align-self: center

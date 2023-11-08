@@ -1,0 +1,22 @@
+@import '../../styles'
+    
+.category-switch-main
+    background-color: $gray-100
+    height: 50px
+    display: flex
+    padding: 4px
+    border-radius: $radius-1
+
+    button
+        flex: 1
+        height: 50px
+        border: none
+        font-size: $text-md
+
+        &:not(.active)
+            color: $gray-400
+            background-color: transparent
+
+        &.active
+            color: $gray-700
+            background-color: white
