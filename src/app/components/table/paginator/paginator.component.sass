@@ -1,0 +1,37 @@
+@import '../../../../styles'
+
+:host
+    display: flex
+    flex: 1
+    flex-direction: row
+    margin-top: $space-4
+    color: $gray-400
+    font-size: $text-sm
+
+    .selector
+        text-align: left
+        display: flex
+        align-items: center
+        flex: 1
+        gap: $space-2
+        
+        select
+            border-radius: $radius-1
+            border: 1px solid $gray-200
+            background: none
+            padding: $padding-2
+            color: $gray-400
+
+    .pages
+        display: flex
+        flex: 1
+        gap: $space-1
+        place-content: flex-end
+        
+        input[type="button"]
+            border-radius: $radius-1
+            width: 32px
+            height: 32px
+            border: 1px solid $gray-200
+            color: $gray-400
+            background: none

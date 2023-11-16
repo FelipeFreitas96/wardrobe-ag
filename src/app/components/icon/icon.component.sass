@@ -1,0 +1,15 @@
+@import '../../../styles'
+
+.rounded
+    border-radius: 100%
+    width: 40px
+    height: 40px
+    background-color: transparentize($primary-color, 0.9)
+    display: flex
+    place-items: center
+    justify-content: center
+
+.hoverable
+    background-color: transparent !important
+    &:hover
+        background-color: transparentize($primary-color, 0.9) !important

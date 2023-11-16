@@ -1,0 +1,10 @@
+<div class="selector">
+    <span>Rows per page</span>
+    <app-select [total]="total / rowsPerPage"></app-select>
+</div>
+    
+<div class="pages">
+    <input type="button" value="<" />
+    <input type="button" *ngFor="let value of totalArray" [value]="value" />
+    <input type="button" value=">" />
+</div>

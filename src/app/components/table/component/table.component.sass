@@ -1,0 +1,75 @@
+@import '../../../../styles'
+
+.table-scrollable
+    max-height: 500px
+    overflow-y: scroll
+
+    &::-webkit-scrollbar
+        background-color: $gray-200
+        width: 2px
+    
+    &::-webkit-scrollbar-thumb
+        background-color: $gray-400
+        border-radius: 10px
+        height: 51px
+
+.menu
+    display: flex
+    position: absolute
+    z-index: 100
+    flex-direction: column
+    width: 140px
+    border-radius: $radius-1
+    background-color: white
+    box-shadow: 0px 0px 8px 0px #B9BEC680
+
+    button
+        background: none
+        border: none
+        padding: $space-1
+        text-align: left
+
+        &:first-child
+            border-top-left-radius: $radius-1
+            border-top-right-radius: $radius-1
+
+        &:last-child
+            border-bottom-left-radius: $radius-1
+            border-bottom-right-radius: $radius-1
+
+        &:hover
+            background-color: $primary-color
+            color: white
+
+table
+    width: 100%
+    text-align: center
+    color: $gray-700
+    border-collapse: collapse
+
+    thead
+        border-top-left-radius: $radius-1
+        border-top-right-radius: $radius-1
+        position: sticky
+        top: 0
+        tr
+            background: $gray-100
+        th
+            padding: $padding-3 0px
+
+    tbody
+        overflow-y: scroll
+        max-height: 480px
+        button
+            border-radius: 100%
+            border: none
+            background: none
+        tr
+            border-bottom: 1px solid $gray-200
+        td
+            padding: $padding-3 0px
+            flex: 1
+            &:last-child
+                width: calc(40px + $padding-3)
+            ::ng-deep svg
+                fill: $gray-400
