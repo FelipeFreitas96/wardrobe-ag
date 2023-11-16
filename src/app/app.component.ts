@@ -47,6 +47,24 @@ export class AppComponent implements OnInit {
     );
   }
 
+  onChangePage = (event: Event, value?: number) => {
+    if (!value) {
+      const target = event.target as HTMLInputElement;
+      value = Number(target.value) - 1;
+      this.products_table.page = value;
+    } else if (value === -1) {
+      this.products_table.page = Math.max(0, this.products_table.page - 1);
+    } else if (value === 1) {
+      this.products_table.page = Math.min(
+        this.products_table.page + 1,
+        Math.floor(
+          (this.products_table.data.total - 1) / this.products_table.pageSize
+        )
+      );
+    }
+    this.refetch();
+  };
+
   onChangeRowsPerPage = (event: Event) => {
     const value = (event.target as HTMLSelectElement).value;
     this.products_table.pageSize = Number(value);

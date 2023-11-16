@@ -14,7 +14,7 @@
         align-items: center
         flex: 1
         gap: $space-2
-        
+
         select
             border-radius: $radius-1
             border: 1px solid $gray-200
@@ -27,7 +27,7 @@
         flex: 1
         gap: $space-1
         place-content: flex-end
-        
+
         input[type="button"]
             border-radius: $radius-1
             width: 32px
@@ -35,3 +35,7 @@
             border: 1px solid $gray-200
             color: $gray-400
             background: none
+
+            &.selected
+                background-color: $primary-color !important
+                color: white

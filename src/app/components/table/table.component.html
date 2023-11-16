@@ -26,6 +26,6 @@
         </table>
     </div>
 
-    <app-table-paginator [total]="table.data.total" [rowsPerPage]="rowsPerPage"
-        [onChangeRowsPerPage]="onChangeRowsPerPage" />
+    <app-table-paginator [total]="table.data.total" [rowsPerPage]="table.pageSize" [currentPage]="table.page"
+        [onChangeRowsPerPage]="onChangeRowsPerPage" [onChangePage]="onChangePage" />
 </ng-container>

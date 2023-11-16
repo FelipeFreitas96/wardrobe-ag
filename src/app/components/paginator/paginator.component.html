@@ -1,10 +1,14 @@
 <div class="selector">
     <span>Rows per page</span>
-    <app-select defaultValue="10" [total]="total / rowsPerPage" [onChangeRowsPerPage]="onChangeRowsPerPage"></app-select>
+    <app-select defaultValue="10" [total]="total / rowsPerPage" [onChangeRowsPerPage]="onChangeRowsPerPage">
+    </app-select>
 </div>
-    
-<div class="pages">
-    <input type="button" value="<" />
-    <input type="button" *ngFor="let value of totalArray" [value]="value" />
-    <input type="button" value=">" />
-</div>
+
+<ng-container *ngIf="onChangePage">
+    <div class="pages">
+        <input type="button" value="<" (click)="onChangePage($event, -1)" />
+        <input type="button" *ngFor="let value of totalArray" [value]="value"
+            [class]="value - 1 == currentPage ? 'selected' : ''" (click)="onChangePage($event)" />
+        <input type="button" value=">" (click)="onChangePage($event, 1)" />
+    </div>
+</ng-container>

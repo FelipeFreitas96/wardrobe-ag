@@ -23,7 +23,8 @@ export class TableComponent {
   };
 
   @Input() rowsPerPage = 10;
-  @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
+  @Input() onChangePage: ((event: Event, value?: number) => void) | undefined;
+  @Input() onChangeRowsPerPage: ((event: Event) => void) | undefined;
   @Input() table: TableEntity<Record<string, unknown>> | undefined;
   @HostListener('document:click', ['$event', 'this']) onDocumentClick() {
     if (!this.hide) {
