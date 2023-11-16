@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { TableEntity } from '../../entities/table.entity';
 
 export type DataMapping = {
   [k: string]: null | ((value: string) => string);
@@ -16,20 +17,14 @@ export type DataDTO<Items> = {
 })
 export class TableComponent {
   hide = true;
-  rowPerPage = 10;
   position = {
     x: 0,
     y: 0,
   };
 
   @Input() rowsPerPage = 10;
-  @Input() headers: string[] = [];
-  @Input() mapping: DataMapping = {};
-  @Input() data: DataDTO<Record<string, unknown>> = {
-    items: [],
-    total: 0,
-  };
-
+  @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
+  @Input() table: TableEntity<Record<string, unknown>> | undefined;
   @HostListener('document:click', ['$event', 'this']) onDocumentClick() {
     if (!this.hide) {
       this.closeSettings();
@@ -37,9 +32,9 @@ export class TableComponent {
   }
 
   getTableByIndex(index: number, value: string) {
-    let str = this.data.items[index][value];
-    if (this.mapping?.[value]) {
-      str = this.mapping[value]!(String(str));
+    let str = this.table?.data.items[index][value];
+    if (this.table?.mapping?.[value]) {
+      str = this.table.mapping[value]!(String(str));
     }
     return str;
   }

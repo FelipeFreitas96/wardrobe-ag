@@ -1,0 +1,31 @@
+<ng-container *ngIf="table">
+    <ng-container *ngIf="!hide">
+        <div class="menu" style="left: {{ position.x }}px; top: {{ position.y }}px;">
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+    </ng-container>
+
+    <div class="table-scrollable">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let header of table.headers;">{{ header }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of table.data.items; let itemId = index">
+                    <td *ngFor="let value of keys(table.mapping);">{{getTableByIndex(itemId, value)}}</td>
+                    <td>
+                        <button class="icon-button" (click)="openSettings($event)">
+                            <app-icon-kebab roundedIcon hoverableIcon></app-icon-kebab>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <app-table-paginator [total]="table.data.total" [rowsPerPage]="rowsPerPage"
+        [onChangeRowsPerPage]="onChangeRowsPerPage" />
+</ng-container>

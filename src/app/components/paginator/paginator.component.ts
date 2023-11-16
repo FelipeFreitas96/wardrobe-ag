@@ -10,6 +10,7 @@ export class PaginatorComponent {
 
   @Input() total = 0;
   @Input() rowsPerPage = 0;
+  @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
 
   ngOnChanges() {
     this.totalArray = Array(Math.floor(this.total / this.rowsPerPage))

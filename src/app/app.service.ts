@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataDTO } from './components/table/component/table.component';
+import { DataDTO } from './components/table/table.component';
 import { ProductColor } from './entities/product-color.entity';
 import { ProductCategory } from './entities/product-category.entity';
 import { ProductSize } from './entities/product-size.entity';
@@ -41,7 +41,7 @@ export class AppService {
         pattern: _pattern.index,
         category: _category.index,
         name: `${_colour.value[0]} ${_pattern.value[0]} ${_size.value[0]} ${_category.value[0]}`,
-        price: 5 + (Math.random() * 15),
+        price: 5 + Math.random() * 15,
         quantity: 100,
       };
     }
@@ -53,11 +53,8 @@ export class AppService {
     this.generateProducts();
   }
 
-  getProducts(
-    pageNumber: number = 0,
-    pageSize: number = 10
-  ): DataDTO<TableItems> {
-    const start = pageNumber * pageSize;
+  getProducts(page: number = 0, pageSize: number = 10): DataDTO<TableItems> {
+    const start = page * pageSize;
     const end = start + pageSize;
     return {
       total: 100,

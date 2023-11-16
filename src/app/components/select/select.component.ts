@@ -7,6 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class SelectComponent {
   @Input() total: number = 0;
+  @Input() defaultValue: string | number | undefined;
+  @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
 
   totalArray: number[] = [];
 

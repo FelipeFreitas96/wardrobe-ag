@@ -1,6 +1,6 @@
 <div class="selector">
     <span>Rows per page</span>
-    <app-select [total]="total / rowsPerPage"></app-select>
+    <app-select defaultValue="10" [total]="total / rowsPerPage" [onChangeRowsPerPage]="onChangeRowsPerPage"></app-select>
 </div>
     
 <div class="pages">

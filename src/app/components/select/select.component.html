@@ -1,3 +1,6 @@
-<select>
-    <option *ngFor="let value of totalArray">{{value}}</option>
-</select>
+<ng-container *ngIf="onChangeRowsPerPage">
+    <select (change)="onChangeRowsPerPage($event)">
+        <option *ngFor="let value of totalArray" value="{{value}}" [selected]="defaultValue == value">{{value}}
+        </option>
+    </select>
+</ng-container>
