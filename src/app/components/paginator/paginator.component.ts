@@ -16,7 +16,7 @@ export class PaginatorComponent {
   @Input() onChangePage: ((event: Event, value?: number) => void) | undefined;
 
   ngOnChanges() {
-    const totalPages = Math.floor(this.total / this.rowsPerPage);
+    const totalPages = Math.ceil(this.total / this.rowsPerPage);
     if (this.cacheArray.length !== totalPages) {
       this.cacheArray = Array(totalPages)
         .fill(0)
@@ -24,7 +24,7 @@ export class PaginatorComponent {
     }
 
     const start = this.cacheArray.slice(
-      Math.min(totalPages - 5, Math.max(0, this.currentPage - 2)),
+      Math.min(Math.max(totalPages - 5, 0), Math.max(0, this.currentPage - 2)),
       Math.min(
         Math.max(0, this.currentPage - 2) === 0 ? 3 : this.currentPage + 1,
         totalPages - 2
