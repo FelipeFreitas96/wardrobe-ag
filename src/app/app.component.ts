@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   title = 'foodtruck-ag';
+  search_input = '';
   products_table: TableEntity<TableItems> = {
     headers: ['ID', 'Product name', 'Category', 'Quantity', 'Price', ''],
     pageSize: 10,
@@ -43,7 +44,8 @@ export class AppComponent implements OnInit {
   private refetch() {
     this.products_table.data = this.appService.getProducts(
       this.products_table.page,
-      this.products_table.pageSize
+      this.products_table.pageSize,
+      this.search_input
     );
   }
 
@@ -62,6 +64,13 @@ export class AppComponent implements OnInit {
         )
       );
     }
+    this.refetch();
+  };
+
+  onSearch = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    this.search_input = value;
     this.refetch();
   };
 

@@ -1,2 +1,2 @@
 <app-icon-search class="icon"></app-icon-search>
-<input type="text" placeholder="Search...">
+<input type="text" [placeholder]="placeholder" (change)="onTextChange?.($event)">

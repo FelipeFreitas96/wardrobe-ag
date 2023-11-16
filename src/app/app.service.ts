@@ -53,12 +53,20 @@ export class AppService {
     this.generateProducts();
   }
 
-  getProducts(page: number = 0, pageSize: number = 10): DataDTO<TableItems> {
+  getProducts(
+    page: number = 0,
+    pageSize: number = 10,
+    q: string = ''
+  ): DataDTO<TableItems> {
     const start = page * pageSize;
     const end = start + pageSize;
+    const items = this.products.filter(
+      (item) => q.length === 0 || item.name.includes(q)
+    );
+
     return {
-      total: 100,
-      items: this.products.slice(start, end),
+      total: items.length,
+      items: items.slice(start, end),
     };
   }
 }
