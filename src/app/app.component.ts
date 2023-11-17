@@ -12,11 +12,12 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   title = 'foodtruck-ag';
-  search_input = '';
-  products_table: TableEntity<TableItems> = {
+  productsTable: TableEntity<TableItems> = {
     headers: ['ID', 'Product name', 'Category', 'Quantity', 'Price', ''],
     pageSize: 10,
     page: 0,
+    categoryInput: 0,
+    searchInput: '',
     mapping: {
       id: (value: string) => {
         return String(value).padStart(4, '0');
@@ -42,41 +43,50 @@ export class AppComponent implements OnInit {
   };
 
   private refetch() {
-    this.products_table.data = this.appService.getProducts(
-      this.products_table.page,
-      this.products_table.pageSize,
-      this.search_input
+    this.productsTable.data = this.appService.getProducts(
+      this.productsTable.page,
+      this.productsTable.pageSize,
+      this.productsTable.searchInput,
+      this.productsTable.categoryInput
     );
   }
 
-  onChangePage = (event: Event, value?: number) => {
-    if (!value) {
-      const target = event.target as HTMLInputElement;
-      value = Number(target.value) - 1;
-      this.products_table.page = value;
-    } else if (value === -1) {
-      this.products_table.page = Math.max(0, this.products_table.page - 1);
-    } else if (value === 1) {
-      this.products_table.page = Math.min(
-        this.products_table.page + 1,
-        Math.floor(
-          (this.products_table.data.total - 1) / this.products_table.pageSize
-        )
-      );
-    }
+  onFilterByCategory = (index: number) => {
+    this.productsTable.categoryInput = index;
+    this.productsTable.page = 0;
     this.refetch();
   };
 
   onSearch = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
-    this.search_input = value;
+    this.productsTable.searchInput = value;
+    this.productsTable.page = 0;
+    this.refetch();
+  };
+
+  onChangePage = (event: Event, value?: number) => {
+    if (!value) {
+      const target = event.target as HTMLInputElement;
+      value = Number(target.value) - 1;
+      this.productsTable.page = value;
+    } else if (value === -1) {
+      this.productsTable.page = Math.max(0, this.productsTable.page - 1);
+    } else if (value === 1) {
+      this.productsTable.page = Math.min(
+        this.productsTable.page + 1,
+        Math.floor(
+          (this.productsTable.data.total - 1) / this.productsTable.pageSize
+        )
+      );
+    }
     this.refetch();
   };
 
   onChangeRowsPerPage = (event: Event) => {
     const value = (event.target as HTMLSelectElement).value;
-    this.products_table.pageSize = Number(value);
+    this.productsTable.pageSize = Number(value);
+    this.productsTable.page = 0;
     this.refetch();
   };
 

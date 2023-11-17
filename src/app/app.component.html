@@ -9,11 +9,11 @@
     </app-header>
     <app-nav>
         <div class="left">
-            <app-category-switch></app-category-switch>
+            <app-category-switch [onChange]="onFilterByCategory"></app-category-switch>
             <app-input placeholder="Search..." [onTextChange]="onSearch"></app-input>
         </div>
         <app-button value="New Product" icon="plus"></app-button>
     </app-nav>
-    <app-table [table]="products_table" [onChangeRowsPerPage]="onChangeRowsPerPage"
+    <app-table [table]="productsTable" [onChangeRowsPerPage]="onChangeRowsPerPage"
         [onChangePage]="onChangePage"></app-table>
 </div>
