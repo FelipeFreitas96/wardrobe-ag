@@ -56,16 +56,18 @@ export class AppService {
   getProducts(
     page: number = 0,
     pageSize: number = 10,
-    q: string = ''
+    q: string = '',
+    category: number = 0
   ): DataDTO<TableItems> {
     const start = page * pageSize;
     const end = start + pageSize;
     const items = this.products.filter(
       (item) =>
-        q.length === 0 ||
-        `${String(item.id).padStart(4, '0')} ${item.name}`
-          .toLowerCase()
-          .includes(q.toLowerCase())
+        (category === 0 || item.category === category - 1) &&
+        (q.length === 0 ||
+          `${String(item.id).padStart(4, '0')} ${item.name}`
+            .toLowerCase()
+            .includes(q.toLowerCase()))
     );
 
     return {
