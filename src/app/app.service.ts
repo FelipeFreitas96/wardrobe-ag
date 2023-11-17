@@ -61,7 +61,11 @@ export class AppService {
     const start = page * pageSize;
     const end = start + pageSize;
     const items = this.products.filter(
-      (item) => q.length === 0 || item.name.includes(q)
+      (item) =>
+        q.length === 0 ||
+        `${String(item.id).padStart(4, '0')} ${item.name}`
+          .toLowerCase()
+          .includes(q.toLowerCase())
     );
 
     return {
