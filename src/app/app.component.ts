@@ -51,9 +51,18 @@ export class AppComponent implements OnInit {
     );
   }
 
+  onSubmit = () => {
+    this.refetch();
+  };
+
   onFilterByCategory = (index: number) => {
     this.productsTable.categoryInput = index;
     this.productsTable.page = 0;
+    this.refetch();
+  };
+
+  onDeleteItem = (id: number) => {
+    this.appService.deleteProduct({ id });
     this.refetch();
   };
 
@@ -63,6 +72,15 @@ export class AppComponent implements OnInit {
     this.productsTable.searchInput = value;
     this.productsTable.page = 0;
     this.refetch();
+  };
+
+  onOpenModal = () => {
+    document.querySelectorAll('.sidebar-component').forEach((sidebar) => {
+      if (sidebar) {
+        sidebar.classList.remove('close');
+        sidebar.classList.add('open');
+      }
+    });
   };
 
   onChangePage = (event: Event, value?: number) => {

@@ -1,2 +1,12 @@
-<app-icon-search class="icon"></app-icon-search>
-<input type="text" [placeholder]="placeholder" (change)="onTextChange?.($event)">
+<div class="icon" *ngIf="currentIcon">
+    <ng-container *ngComponentOutlet="currentIcon"></ng-container>
+</div>
+
+<div [attr.class]="(formGroup && formGroup.controls[name].errors && formGroup.controls[name].touched) ? 'error' : ''">
+    <input type="text" [inputMask]="inputMask" [formControl]="formGroup ? formGroup.controls[name] : standaloneControl"
+        [name]="name" [class]="currentIcon !== undefined ? 'icon-input' : ''" (change)="onTextChange?.($event)">
+</div>
+
+<!-- <small *ngIf="formGroup && formGroup.controls[name].errors && formGroup.controls[name].touched">
+    <span *ngIf="formGroup.controls[name].errors.inputMask">Fill the field</span>
+</small> -->

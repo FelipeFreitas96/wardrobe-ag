@@ -6,7 +6,7 @@
     flex-direction: row
     margin-top: $space-4
     color: $gray-400
-    font-size: $text-sm
+    font-size: $text-xs
 
     .selector
         text-align: left
@@ -14,6 +14,12 @@
         align-items: center
         flex: 1
         gap: $space-2
+
+        ::ng-deep .dropdown::after
+            width: 24px
+            height: 24px
+            top: calc(50% - 12px)
+            margin-right: 0px
 
         select
             border-radius: $radius-1

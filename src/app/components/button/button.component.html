@@ -5,4 +5,5 @@
     </div>
 </ng-container>
 
-<input type="button" [value]="value" [class.hasIcon]="currentIcon" />
+<input [type]="type" (click)="onClick?.($event)" (submit)="onSubmit?.($event)" [value]="value" [class.primary]="primary"
+    [class.hasIcon]="currentIcon" />

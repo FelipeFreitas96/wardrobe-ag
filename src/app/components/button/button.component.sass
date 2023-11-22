@@ -4,14 +4,22 @@
     position: relative
 
     input
-        background-color: $primary-color
         height: 50px
         width: 158px
         line-height: 1px
-        font-size: $text-md
+        font-size: $text-sm
         color: white
         border: none
         border-radius: $radius-1
+
+        &.primary
+            background-color: $primary-color
+
+        &:not(.primary)
+            background-color: white !important
+            border: 1px solid $gray-400
+            color: $gray-500
+            font-weight: $text-boldest
 
     input.hasIcon
         padding-left: $space-3

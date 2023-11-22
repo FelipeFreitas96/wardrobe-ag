@@ -1,0 +1,44 @@
+<app-sidebar title="New Product">
+    <form class="root" [formGroup]="productFormGroup" (ngSubmit)="onProductSubmit()">
+        <div class="row">
+            <label for="category" class="col">
+                <div class="full">Category</div>
+                <app-select [options]="categoryOptions" name="category" [formGroup]="productFormGroup"></app-select>
+            </label>
+            <label for="id" class="col">
+                <div class="full">ID</div>
+                <app-input [inputMask]="productFormMask.id" name="id" [formGroup]="productFormGroup"></app-input>
+            </label>
+        </div>
+        <div class="row">
+            <label for="color" class="col">
+                <div class="full">Color</div>
+                <app-select [options]="colorOptions" name="color" [formGroup]="productFormGroup"></app-select>
+            </label>
+            <label for="size" class="col">
+                <div class="full">Size</div>
+                <app-select [options]="sizeOptions" name="size" [formGroup]="productFormGroup"></app-select>
+            </label>
+            <label for="pattern" class="col">
+                <div class="full">Pattern</div>
+                <app-select [options]="patternOptions" name="pattern" [formGroup]="productFormGroup"></app-select>
+            </label>
+        </div>
+        <div class="row">
+            <label for="quantity" class="col">
+                <div class="full">Quantity</div>
+                <app-input [inputMask]="productFormMask.quantity" name="quantity"
+                    [formGroup]="productFormGroup"></app-input>
+            </label>
+            <label for="price" class="col">
+                <div class="full">Price</div>
+                <app-input icon="euro" [inputMask]="productFormMask.price" name="price"
+                    [formGroup]="productFormGroup"></app-input>
+            </label>
+        </div>
+        <div class="btns">
+            <app-button value="Cancel"></app-button>
+            <app-button type="submit" [primary]="true" value="Add"></app-button>
+        </div>
+    </form>
+</app-sidebar>

@@ -5,6 +5,7 @@ import { ProductCategory } from './entities/product-category.entity';
 import { ProductSize } from './entities/product-size.entity';
 import { ProductPattern } from './entities/product-pattern.entity';
 import { Utils } from './utils';
+import { FakeHttpError } from './utils/error';
 
 export type TableItems = {
   id: number;
@@ -28,7 +29,7 @@ export class AppService {
     const sizes = Utils.getValuesFromEnum(ProductSize.Dictionary);
     const patterns = Utils.getValuesFromEnum(ProductPattern.Dictionary);
 
-    for (let id = 0; id < 100; id++) {
+    for (let id = 0; id < 1000; id++) {
       const _category = Utils.chooseRandomElement(categories);
       const _pattern = Utils.chooseRandomElement(patterns);
       const _colour = Utils.chooseRandomElement(colours);
@@ -42,7 +43,7 @@ export class AppService {
         category: _category.index,
         name: `${_colour.value[0]} ${_pattern.value[0]} ${_size.value[0]} ${_category.value[0]}`,
         price: 5 + Math.random() * 15,
-        quantity: 100,
+        quantity: Math.ceil(Math.random() * 10),
       };
     }
 
@@ -51,6 +52,43 @@ export class AppService {
 
   constructor() {
     this.generateProducts();
+  }
+
+  async deleteProduct(item: Pick<TableItems, 'id'>) {
+    const index = this.products.findIndex((product) => product.id === item.id);
+    console.log(this.products, item);
+    if (index === -1) {
+      throw new FakeHttpError('Product ID not found');
+    }
+
+    this.products.splice(index, 1);
+    return this.products;
+  }
+
+  async addProduct(item: Omit<TableItems, 'name'>) {
+    const { id, color, size, pattern, category, price, quantity } = item;
+    if (this.products.find((item) => item.id === id)) {
+      throw new FakeHttpError('Product ID already exists');
+    }
+
+    const categories = Utils.getValuesFromEnum(
+      ProductCategory.Dictionary
+    ) as unknown as ProductCategory.Enum[][];
+    const colours = Utils.getValuesFromEnum(ProductColor.Dictionary);
+    const sizes = Utils.getValuesFromEnum(ProductSize.Dictionary);
+    const patterns = Utils.getValuesFromEnum(ProductPattern.Dictionary);
+    this.products[this.products.length] = {
+      id,
+      color,
+      size,
+      pattern,
+      category,
+      name: `${colours[color]} ${patterns[pattern]} ${sizes[size]} ${categories[category][0]}`,
+      price,
+      quantity,
+    };
+
+    return this.products;
   }
 
   getProducts(

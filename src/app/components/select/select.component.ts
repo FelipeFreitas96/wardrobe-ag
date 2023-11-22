@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-select',
@@ -6,15 +11,27 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./select.component.sass'],
 })
 export class SelectComponent {
-  @Input() total: number = 0;
-  @Input() defaultValue: string | number | undefined;
-  @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
-
-  totalArray: number[] = [];
+  value: string | number = '';
+  standaloneControl = new FormControl();
 
   ngOnInit() {
-    this.totalArray = Array(this.total)
-      .fill(0)
-      .map((x, i) => i + 1);
+    if (this.value === '') {
+      this.value = String(this.defaultValue);
+    }
   }
+
+  onChangeValue(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.onChange?.(event);
+    this.value = String(target?.value);
+  }
+
+  @Input() name: string = '';
+  @Input() formGroup?: any;
+  @Input() options: {
+    value: string | number;
+    label: string;
+  }[] = [];
+  @Input() defaultValue?: string | number;
+  @Input() onChange: ((value: Event) => void) | undefined;
 }

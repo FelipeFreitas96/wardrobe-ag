@@ -10,10 +10,12 @@
     <app-nav>
         <div class="left">
             <app-category-switch [onChange]="onFilterByCategory"></app-category-switch>
-            <app-input placeholder="Search..." [onTextChange]="onSearch"></app-input>
+            <app-input icon="search" placeholder="Search..." [onTextChange]="onSearch"></app-input>
         </div>
-        <app-button value="New Product" icon="plus"></app-button>
+        <app-button [primary]="true" [onClick]="onOpenModal" value="New Product" icon="plus"></app-button>
     </app-nav>
     <app-table [table]="productsTable" [onChangeRowsPerPage]="onChangeRowsPerPage"
-        [onChangePage]="onChangePage"></app-table>
+        [onTableDeleteItem]="onDeleteItem" [onChangePage]="onChangePage"></app-table>
 </div>
+
+<page-new-product [onSubmit]="onSubmit"></page-new-product>

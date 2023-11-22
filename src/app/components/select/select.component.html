@@ -1,6 +1,8 @@
-<ng-container *ngIf="onChangeRowsPerPage">
-    <select (change)="onChangeRowsPerPage($event)">
-        <option *ngFor="let value of totalArray" value="{{value}}" [selected]="defaultValue == value">{{value}}
+<div class="dropdown">
+    <select [name]="name" [formControl]="formGroup ? formGroup.controls[name] : standaloneControl"
+        (change)="onChangeValue($event)">
+        <option *ngFor="let option of options" value="{{option.value}}" [selected]="value == option.value">
+            {{option.label}}
         </option>
     </select>
-</ng-container>
+</div>

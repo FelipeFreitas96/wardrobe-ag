@@ -8,12 +8,24 @@ import { Component, Input } from '@angular/core';
 export class PaginatorComponent {
   cacheArray: number[] = [];
   totalArray: number[] = [];
-
+  
   @Input() total = 0;
   @Input() rowsPerPage = 0;
   @Input() currentPage = 0;
   @Input() onChangeRowsPerPage: ((value: Event) => void) | undefined;
   @Input() onChangePage: ((event: Event, value?: number) => void) | undefined;
+
+  getOptions() {
+    return Array(6)
+      .fill(0)
+      .map((x, i) => {
+        const value = String(5 + i);
+        return {
+          value,
+          label: value,
+        };
+      });
+  }
 
   ngOnChanges() {
     const totalPages = Math.ceil(this.total / this.rowsPerPage);

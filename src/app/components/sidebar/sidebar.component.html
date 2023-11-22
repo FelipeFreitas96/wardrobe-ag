@@ -1,0 +1,8 @@
+<div class="sidebar-component sidebar-foreground" (click)="onCloseModal()"></div>
+<div class="sidebar-component sidebar">
+    <button (click)="onCloseModal()">
+        <app-icon-rightarrow icon="rightarrow"></app-icon-rightarrow>
+    </button>
+    <h1>{{title}}</h1>
+    <ng-content></ng-content>
+</div>
