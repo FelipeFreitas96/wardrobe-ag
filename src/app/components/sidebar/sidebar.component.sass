@@ -15,13 +15,13 @@
 
 @keyframes openSideBar
     0%
-        right: -1000px
+        right: -100000px
     100%
         right: 0px
 
 @keyframes closeSideBar
     100%
-        right: -1000px
+        right: -100000px    
     0%
         right: 0px
 
@@ -47,7 +47,8 @@
 .sidebar
     position: absolute
     top: 0
-    right: -1000px
+    right: -100000px
+    display: none
     width: 592px
     height: calc(100vh - ($space-6 * 2) - 2px)
     box-shadow: 0px 2px 6px 0px #0000000F
@@ -63,9 +64,11 @@
     &.open
         right: 0px
         animation: openSideBar 0.25s linear
+        display: block
 
     &.close
         right: -1000px
+        display: none
         animation: closeSideBar 0.25s linear
 
     h1
