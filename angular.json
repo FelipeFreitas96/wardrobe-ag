@@ -24,6 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": ["src/favicon.ico", "src/assets", "src/assets/svg/*"],
+            "allowedCommonJsDependencies": ["inputmask"],
             "styles": ["src/styles.sass"],
             "scripts": []
           },
@@ -32,7 +33,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "550kb",
                   "maximumError": "1mb"
                 },
                 {
