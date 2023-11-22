@@ -107,6 +107,8 @@ export class AppComponent implements OnInit {
         )
       );
     }
+
+    console.log('TA CHAMADNO');
     this.refetch();
   };
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +7,17 @@ import { Component, Input } from '@angular/core';
 })
 export class SidebarComponent {
   @Input() title: string = '';
+
+  @HostListener('document:keyup', ['$event', 'this']) onDocumentClick(
+    event: KeyboardEvent
+  ) {
+    if (event.key === 'Escape') {
+      const sidebar = document.querySelectorAll('.sidebar-component.open');
+      if (sidebar) {
+        this.onCloseModal();
+      }
+    }
+  }
 
   onCloseModal = () => {
     document.querySelectorAll('.sidebar-component').forEach((sidebar) => {
