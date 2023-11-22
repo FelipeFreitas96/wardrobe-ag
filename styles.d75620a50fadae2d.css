@@ -1,0 +1,1 @@
+*{margin:0;padding:0}body{font-family:Lato;overflow-x:hidden}hr{border:0;border-top:1px solid #E5E7EB}.toast-container{position:absolute;top:20px;right:20px;width:300px;text-align:center;display:flex;flex-direction:column;gap:10px}.toast-error{background-color:#fee2e2;padding:24px;border-radius:8px;font-weight:500;border:1px solid #EF4444}
