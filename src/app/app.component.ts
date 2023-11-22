@@ -11,7 +11,7 @@ import { TableEntity } from './entities/table.entity';
 export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
-  title = 'foodtruck-ag';
+  title = 'wardrobe-ag';
   productsTable: TableEntity<TableItems> = {
     headers: ['ID', 'Product name', 'Category', 'Quantity', 'Price', ''],
     pageSize: 10,

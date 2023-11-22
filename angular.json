@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "foodtruck-ag": {
+    "wardrobe-ag": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/foodtruck-ag",
+            "outputPath": "dist/wardrobe-ag",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -58,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "foodtruck-ag:build:production"
+              "browserTarget": "wardrobe-ag:build:production"
             },
             "development": {
-              "browserTarget": "foodtruck-ag:build:development"
+              "browserTarget": "wardrobe-ag:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -69,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "foodtruck-ag:build"
+            "browserTarget": "wardrobe-ag:build"
           }
         },
         "test": {
