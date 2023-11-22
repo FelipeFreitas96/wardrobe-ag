@@ -4,7 +4,7 @@
 
 <div [attr.class]="(formGroup && formGroup.controls[name].errors && formGroup.controls[name].touched) ? 'error' : ''">
     <input type="text" [inputMask]="inputMask" [formControl]="formGroup ? formGroup.controls[name] : standaloneControl"
-        [name]="name" [class]="currentIcon !== undefined ? 'icon-input' : ''" (change)="onTextChange?.($event)">
+        [name]="name" [class]="currentIcon !== undefined ? 'icon-input' : ''" (keyup)="onTextChange?.($event)">
 </div>
 
 <!-- <small *ngIf="formGroup && formGroup.controls[name].errors && formGroup.controls[name].touched">

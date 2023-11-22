@@ -74,6 +74,15 @@ export class AppComponent implements OnInit {
     this.refetch();
   };
 
+  onCloseModal = () => {
+    document.querySelectorAll('.sidebar-component').forEach((sidebar) => {
+      if (sidebar) {
+        sidebar.classList.remove('open');
+        sidebar.classList.add('close');
+      }
+    });
+  };
+
   onOpenModal = () => {
     document.querySelectorAll('.sidebar-component').forEach((sidebar) => {
       if (sidebar) {

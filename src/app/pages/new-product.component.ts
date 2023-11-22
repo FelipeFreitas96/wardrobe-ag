@@ -114,5 +114,6 @@ export class NewProductComponent {
       });
   };
 
+  @Input() onCancel: (() => void) | undefined;
   @Input() onSubmit: ((item: TableItems[]) => void) | undefined;
 }

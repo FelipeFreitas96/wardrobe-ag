@@ -37,7 +37,7 @@
             </label>
         </div>
         <div class="btns">
-            <app-button value="Cancel"></app-button>
+            <app-button value="Cancel" (click)="onCancel?.()"></app-button>
             <app-button type="submit" [primary]="true" value="Add"></app-button>
         </div>
     </form>

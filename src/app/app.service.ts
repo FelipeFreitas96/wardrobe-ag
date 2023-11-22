@@ -28,6 +28,7 @@ export class AppService {
     const colours = Utils.getValuesFromEnum(ProductColor.Dictionary);
     const sizes = Utils.getValuesFromEnum(ProductSize.Dictionary);
     const patterns = Utils.getValuesFromEnum(ProductPattern.Dictionary);
+    const data = [];
 
     for (let id = 0; id < 1000; id++) {
       const _category = Utils.chooseRandomElement(categories);
@@ -35,7 +36,7 @@ export class AppService {
       const _colour = Utils.chooseRandomElement(colours);
       const _size = Utils.chooseRandomElement(sizes);
 
-      this.products[this.products.length] = {
+      data[data.length] = {
         id,
         color: _colour.index,
         size: _size.index,
@@ -47,21 +48,31 @@ export class AppService {
       };
     }
 
-    return this.products;
+    return data;
+  }
+
+  private persistOnStorage() {
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   constructor() {
-    this.generateProducts();
+    const storage = localStorage.getItem('products');
+    if (storage) {
+      this.products = JSON.parse(storage);
+    } else {
+      this.products = this.generateProducts();
+      this.persistOnStorage();
+    }
   }
 
   async deleteProduct(item: Pick<TableItems, 'id'>) {
     const index = this.products.findIndex((product) => product.id === item.id);
-    console.log(this.products, item);
     if (index === -1) {
       throw new FakeHttpError('Product ID not found');
     }
 
     this.products.splice(index, 1);
+    this.persistOnStorage();
     return this.products;
   }
 
@@ -88,6 +99,7 @@ export class AppService {
       quantity,
     };
 
+    this.persistOnStorage();
     return this.products;
   }
 
