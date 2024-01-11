@@ -1,7 +1,8 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { AppService, TableItems } from './app.service';
+import { Component, OnInit } from '@angular/core';
 import { ProductCategory } from './entities/product-category.entity';
 import { TableEntity } from './entities/table.entity';
+import { ProductEntity } from './entities/product.entity';
+import { ProductsService } from './services/products/products.service';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +10,18 @@ import { TableEntity } from './entities/table.entity';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent implements OnInit {
-  constructor(private appService: AppService) {}
+  constructor(private productsService: ProductsService) {}
 
   title = 'wardrobe-ag';
-  productsTable: TableEntity<TableItems> = {
-    headers: ['ID', 'Product name', 'Category', 'Quantity', 'Price', ''],
+  productsTable: TableEntity<ProductEntity> = {
+    headers: ['ID', 'Product name', 'Quantity', 'Price', ''],
     pageSize: 10,
     page: 0,
     categoryInput: 0,
     searchInput: '',
     mapping: {
-      id: (value: string) => {
-        return String(value).padStart(4, '0');
-      },
+      id: null,
       name: null,
-      category: (value: string) => {
-        return ProductCategory.Dictionary[
-          Number(value) as ProductCategory.Enum
-        ][0];
-      },
       quantity: null,
       price: (value: string) => {
         return Number(value).toLocaleString('en-IE', {
@@ -42,8 +36,8 @@ export class AppComponent implements OnInit {
     },
   };
 
-  private refetch() {
-    this.productsTable.data = this.appService.getProducts(
+  private async refetch() {
+    this.productsTable.data = await this.productsService.getProducts(
       this.productsTable.page,
       this.productsTable.pageSize,
       this.productsTable.searchInput,
@@ -61,9 +55,10 @@ export class AppComponent implements OnInit {
     this.refetch();
   };
 
-  onDeleteItem = (id: number) => {
-    this.appService.deleteProduct({ id });
-    this.refetch();
+  onDeleteItem = (id: string) => {
+    this.productsService.deleteProduct({ id }).then(() => {
+      this.refetch();
+    });
   };
 
   onSearch = (event: Event) => {
@@ -107,8 +102,6 @@ export class AppComponent implements OnInit {
         )
       );
     }
-
-    console.log('TA CHAMADNO');
     this.refetch();
   };
 

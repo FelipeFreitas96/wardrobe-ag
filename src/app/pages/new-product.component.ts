@@ -4,10 +4,11 @@ import { createMask } from '@ngneat/input-mask';
 import { ProductSize } from '../entities/product-size.entity';
 import { ProductColor } from '../entities/product-color.entity';
 import { ProductPattern } from '../entities/product-pattern.entity';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { AppService, TableItems } from '../app.service';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { FakeHttpError } from '../utils/error';
+import { ProductsService } from '../services/products/products.service';
+import { ProductEntity } from '../entities/product.entity';
+import { DataDTO } from '../components/table/table.component';
 
 @Component({
   selector: 'page-new-product',
@@ -16,7 +17,7 @@ import { FakeHttpError } from '../utils/error';
 })
 export class NewProductComponent {
   constructor(
-    private appService: AppService,
+    private productsService: ProductsService,
     private toastService: ToastrService
   ) {}
 
@@ -39,7 +40,6 @@ export class NewProductComponent {
   );
 
   productFormGroup = new FormGroup({
-    id: new FormControl('A'),
     category: new FormControl('0'),
     size: new FormControl('0'),
     color: new FormControl('0'),
@@ -49,13 +49,6 @@ export class NewProductComponent {
   });
 
   productFormMask = {
-    id: createMask({
-      regex: '^[0-9]{4}$',
-      clearIncomplete: false,
-      clearMaskOnLostFocus: false,
-      nullable: false,
-      rightAlign: false,
-    }),
     quantity: createMask({
       alias: 'numeric',
       radixPoint: '',
@@ -82,7 +75,7 @@ export class NewProductComponent {
     let error = false;
 
     const controls = Object.entries(this.productFormGroup.controls);
-    for (const [index, entry] of controls) {
+    for (const [_, entry] of controls) {
       entry.markAsTouched({ onlySelf: true });
       if (entry.status === 'INVALID') {
         error = true;
@@ -91,12 +84,11 @@ export class NewProductComponent {
 
     if (error) return;
 
-    const { id, category, size, color, pattern, quantity, price } =
+    const { category, size, color, pattern, quantity, price } =
       this.productFormGroup.value;
 
-    this.appService
+    this.productsService
       .addProduct({
-        id: Number(id),
         category: Number(category),
         size: Number(size),
         color: Number(color),
@@ -105,15 +97,11 @@ export class NewProductComponent {
         price: Number(price?.replaceAll(',', '')),
       })
       .then(this.onSubmit)
-      .catch((err) => {
-        if (err instanceof FakeHttpError) {
-          this.toastService.error('Error', err.message);
-        } else {
-          this.toastService.error('Error', 'Unexpected error');
-        }
+      .catch(() => {
+        this.toastService.error('Error', 'Unexpected error');
       });
   };
 
   @Input() onCancel: (() => void) | undefined;
-  @Input() onSubmit: ((item: TableItems[]) => void) | undefined;
+  @Input() onSubmit: ((item: DataDTO<ProductEntity>) => void) | undefined;
 }
