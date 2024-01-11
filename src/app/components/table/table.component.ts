@@ -17,14 +17,14 @@ export type DataDTO<Items> = {
 })
 export class TableComponent {
   hide = true;
-  itemId = 0;
+  id = '';
   position = {
     x: 0,
     y: 0,
   };
 
   @Input() rowsPerPage = 10;
-  @Input() onTableDeleteItem: ((itemId: number) => void) | undefined;
+  @Input() onTableDeleteItem: ((id: string) => void) | undefined;
   @Input() onChangePage: ((event: Event, value?: number) => void) | undefined;
   @Input() onChangeRowsPerPage: ((event: Event) => void) | undefined;
   @Input() table: TableEntity<Record<string, unknown>> | undefined;
@@ -53,18 +53,18 @@ export class TableComponent {
   }
 
   onDeleteItem() {
-    this.onTableDeleteItem?.(this.itemId);
+    this.onTableDeleteItem?.(this.id);
     this.closeSettings();
   }
 
-  openSettings(event: MouseEvent, itemId: unknown) {
+  openSettings(event: MouseEvent, id: unknown) {
     event.preventDefault();
     event.stopPropagation();
 
     const positionX = Math.abs(event.clientX - event.offsetX);
     const positionY = Math.abs(event.clientY - event.offsetY);
 
-    this.itemId = Number(itemId);
+    this.id = String(id);
     this.position.x = positionX - 120;
     this.position.y = positionY + 5;
     this.hide = false;

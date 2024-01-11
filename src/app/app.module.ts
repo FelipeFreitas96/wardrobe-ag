@@ -10,7 +10,6 @@ import { CategorySwitchComponent } from './components/category-switch/category-s
 import { NavComponent } from './components/nav/nav.component';
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
-import { AppService } from './app.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NewProductComponent } from './pages/new-product.component';
 import { SelectComponent } from './components/select/select.component';
@@ -20,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { ProductsService } from './services/products/products.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { provideToastr } from 'ngx-toastr';
     ReactiveFormsModule,
   ],
   providers: [
-    AppService,
+    ProductsService,
     provideAnimations(), // required animations providers
     provideToastr(), // Toastr providers
   ],
